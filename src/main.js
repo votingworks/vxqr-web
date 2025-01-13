@@ -8,7 +8,7 @@ QhxXvCA/D0gYVRRIiuOxxof+4IysM6Lpk4tebN3OZHoyyQHrk/F6oQBa1w==
 -----END PUBLIC KEY-----
 `;
 
-window.onload = async function () {
+window.onload = window.onhashchange = async function () {
     const path = document.location.pathname;
     const hash = document.location.hash.substring(1);
 
@@ -24,8 +24,10 @@ window.onload = async function () {
 
 	if (result) {
 	    document.getElementById('success').style.display = 'inline';
+	    document.getElementById('failure').style.display = 'none';
 	} else {
 	    document.getElementById('failure').style.display = 'inline';
+	    document.getElementById('success').style.display = 'none';
 	}
 
     }
