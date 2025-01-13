@@ -1,9 +1,8 @@
-// verify.js
+
 import { bytesToHex } from '@noble/hashes/utils';
 import { p256 } from '@noble/curves/p256';
 import { sha256 } from '@noble/hashes/sha256';
 
-// Helper function to decode base64url to Uint8Array
 export function base64UrlToBase64(base64url) {
     return base64url
           .replace(/-/g, '+')
@@ -24,7 +23,7 @@ export async function verifyECDSASignature(message, signature, publicKey) {
                 .map(c => c.charCodeAt(0))
         );
 
-        // Extract the actual public key point from the DER format
+        // Extract the actual public key EC point from the DER format
         // Skip the ASN.1 header (usually first 26 bytes for ECDSA public keys)
         const publicKeyPoint = publicKeyDER.slice(26);
 
@@ -36,7 +35,6 @@ export async function verifyECDSASignature(message, signature, publicKey) {
 
         const messageHash = sha256(new TextEncoder().encode(message));
 
-        // Verify the signature
         return await p256.verify(
 	    signatureBytes,
             messageHash,
